@@ -61,14 +61,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button.setOnClickListener(this);
 
         videoView=(VideoView)findViewById(R.id.videoView);
-        String spath = new File(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "TestFile2").toString();
+        String path=this.getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString();
+        File file = new File(path,"seccion1");
+        Log.i("DataView",file.toString());
+            if(file.exists()){
+
+            Log.i("DataView","Si");
+        }
+        else{
+            Log.i("DataView","No");
+                file.mkdir();
+
+        }
         String zipname = "/Desktop.zip";
-        Uri path=Uri.parse(spath+"/alveolos.mp4");
-        videoView.setVideoURI(path);
+        Uri paths=Uri.parse(file+"/amigdalas.mp4");
+        videoView.setVideoURI(paths);
         videoView.setMediaController(new MediaController(this));
 
 
         videoView.start();
+       // Log.i("DataView",spath);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btnDescompress:
                 // decompress();
-                String spath = new File(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "TestFile2").toString();
+                String spath = new File(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "seccion1").toString();
                 String zipname = "/Desktop.zip";
                 decompress(spath, zipname);
                 break;
@@ -142,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void decompress() {
         try {
-            File file = new File(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "TestFile2");
+            File file = new File(this.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "seccion1");
             ZipInputStream zis = new ZipInputStream(new FileInputStream(file + "/" + "Desktop.zip"));
             ZipEntry entrada;
 
@@ -190,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     continue;
                 }
 
-                FileOutputStream fout = new FileOutputStream(path + filename);
+                FileOutputStream fout = new FileOutputStream(path +"/" +filename);
 
                 // cteni zipu a zapis
                 while ((count = zis.read(buffer)) != -1) {

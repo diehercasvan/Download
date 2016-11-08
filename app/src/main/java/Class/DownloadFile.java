@@ -110,7 +110,7 @@ public class DownloadFile extends AsyncTask<String, String, String> {
             connection.connect();
             int lenghtOfFile=connection.getContentLength();
 
-            File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "TestFile2");
+            File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "seccion1");
 
             InputStream inputStream=new BufferedInputStream(url.openStream(),8192);
             OutputStream outputStream=new FileOutputStream(file+"/"+"Desktop.zip");
